@@ -53,3 +53,12 @@ const router = useRouter();
 ```
 
 https://nextjs.org/docs/api-reference/next/router#userouter
+
+# 4. CSS module
+
+anything.module.css 형식의 모듈 파일을 생성한 후 import 해서 사용한다. 모듈방식을 사용하면 클래스 네임의 충돌을 걱정할 필요가 사라지지만, 해당 방식처럼 사용한다면 css 파일이 엄청 늘어날 수 있다.
+`import styles from './NavBar.module.css`
+해당 모듈(스타일시트)를 사용하는 방법
+
+1. 백탭: className={`${styles.link} ${router.pathname === "/" ? styles.active : ""}`}
+2. 배열형식: [styles.link, router.pathname === "/" ? styles.active : ""].join(" ")

@@ -1,0 +1,13 @@
+.nav {
+    display: flex;
+    justify-content: center;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.active {
+    color: pink;
+}
