@@ -62,3 +62,41 @@ anything.module.css 형식의 모듈 파일을 생성한 후 import 해서 사�
 
 1. 백탭: className={`${styles.link} ${router.pathname === "/" ? styles.active : ""}`}
 2. 배열형식: [styles.link, router.pathname === "/" ? styles.active : ""].join(" ")
+
+# 5. styled CSS // NextJS 고유의 방식(?)
+
+styled-jsx를 사용하는 컴포넌트 다음과 같이 정의합니다
+
+```
+< style jsx>{`
+CSS 스타일..
+`}< /style>
+```
+
+https://github.com/vercel/styled-jsx
+
+# 6. Custom App & global.css
+
+Next.js는 App 컴포넌트를 사용하여 page를 초기화합니다. 또한 App 컴포넌트는 커스터마이징이 가능하며, 페이지 초기화를 제어 및 아래와 같은 기능을 수행할 수 있습니다.
+
+1. 페이지 변경 간에 레이아웃 유지
+2. 페이지 탐색 시 state 유지
+3. componentDidCatch를 사용한 Custom 에러 처리
+4. 페이지에 추가 데이터 삽입
+5. Global CSS 추가
+
+기본 App을 재정의하려면 아래와 같이 ./pages/\_app.js 파일을 만듭니다.
+
+```
+export default function MyApp({ Component, pageProps }) {
+return < Component {...pageProps} />
+}
+```
+
+https://nextjs.org/docs/advanced-features/custom-app
+
+또한 .css 파일은 App 이외 다른 컴포넌트에서 사용할 수 없으며,
+다른 컴포넌트에서 스타일시트를 적용하고 싶다면 무조건 module.css 형식으로 변경한 후 임포트하여 사용해야한다.
+https://nextjs.org/docs/messages/css-global
+
+# RECAP https://nomadcoders.co/nextjs-fundamentals/lectures/3444

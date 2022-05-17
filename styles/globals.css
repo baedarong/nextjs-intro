@@ -1,3 +1,6 @@
+/* global CSS cannot be imported from files other than your custom <APP> */
+/* 다른 컴포넌트에서 스타일시트를 적용하고 싶다면 무조건 module.css 형식을 보여아한다. */
+
 html,
 body {
   padding: 0;
@@ -14,3 +17,4 @@ a {
 * {
   box-sizing: border-box;
 }
+
