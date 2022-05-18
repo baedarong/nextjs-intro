@@ -1,25 +1,48 @@
-import Link from "next/link"
-import { useRouter } from "next/router"
-// Link:: NextJs 어플리케이션의 클라이언트 사이드 네비게이션을 제공해줍니다. 
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCamera } from '@fortawesome/free-solid-svg-icons'
 
 export default function NavBar() {
-    const router = useRouter(); // hook to Router
-    return (
-        <nav> 
-            <Link href="/"><a className={router.pathname === '/' ? "active" : ""}> Home </a></Link>
-            <Link href="/about"><a className={router.pathname === '/about' ? "active" : ""}> About </a></Link>
-            <style jsx> {`
-            nav { //tag name
-                background-color:white;
-            } 
-            a {
-                text-decoration:none; 
-            }
-            .active { //className
-                color:red;
-                font-weight:bold;
-            }
-            `} </style>
-        </nav>
-    )
+  const router = useRouter();
+  return (
+    <nav>
+      <FontAwesomeIcon icon={faCamera}  size='2x'/>
+      <div>
+        <Link href="/">
+          <a className={router.pathname === "/" ? "active" : ""}>Home</a>
+        </Link>
+        <Link href="/about">
+          <a className={router.pathname === "/about" ? "active" : ""}>About</a>
+        </Link>
+      </div>
+      <style jsx>{`
+        nav {
+          display: flex;
+          gap: 10px;
+          flex-direction: column;
+          align-items: center;
+          padding-top: 20px;
+          padding-bottom: 10px;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+            rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        }
+        img {
+          max-width: 100px;
+          margin-bottom: 5px;
+        }
+        nav a {
+          font-weight: 600;
+          font-size: 18px;
+        }
+        .active {
+          color: tomato;
+        }
+        nav div {
+          display: flex;
+          gap: 10px;
+        }
+      `}</style>
+    </nav>
+  );
 }
