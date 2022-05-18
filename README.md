@@ -139,6 +139,15 @@ https://nexts.org/docs/api-reference/next.config.js/introduction
 - getServerSideProps
   page에서 서버 측 랜더링 함수인 getServerSideProps함수를 export하는 경우 Next.js는 getServerSideProps에서 반환된 데이터를 사용하여 각 request에서 이 페이지를 pre-render합니다. getServerSideProps는 서버 측에서만 실행되며 브라우저에서는 실행되지 않습니다. 서버 사이드 렌더링을 사용하면 redirect 및 rewrite 프론트 기능을 사용할 수 없게됩니다. 이에 데이터를 다 가져와서 rendering 하는 방식 (서버 사이드 렌더링) vs 미리 정적 html을 불러온 후 데이터를 입힐지 (클라이언트 사이드 렌더링) 선택하여 구현하는것이 중요합니다.
   https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props
+- 특징
+
+```
+export 필수, 함수명 getServerSideProps 이름 필수, return Object & props key 필수
+서버, 즉 백엔드에서만 해당 코드를 pre-runninng 하기에 프론트에서 해당 내용을 확인할 수 없다.
+props 데이터를 page로 전송하여 parameter로 사용이 가능하다.
+데이터가 유효할 때 전체적으로 화면이 보이는 방식이기 때문에 Loading Component를 사용 할 필요가 없다.
+
+```
 
 - getServerSideProps를 사용하여 request시 데이터 fetch하고 결과를 pre-rendering하기
 
@@ -158,3 +167,10 @@ export default function Home({ data }) {
 }
 
 ```
+
+# 2. RECAP 클라이언드 사이드 렌더링 vs 서버 사이드 렌더링
+
+- 클라이언드 사이드 렌더링
+  데이터 패치 전에 미리 html 페이지를 export 하여 생성한다. 고로 reactJs를 통해 차후에 들어오는 데이터가 소스에 포함되지 않는다. 누구가 홈페이지에 접속했을 때 reactJs가 처리를 마치기 전까지는 initialPage를 확인할 수 있다. 즉) ReactJs의 처리가 완료될 때까지 기다려야하며 유저는 API에서 데이터를 받아올 때까지 "로딩중" 상태를 봐야한다.
+- 서버 사이드 렌더링
+  항상 html이 완전한 상태로 존재. 유저가 접속했을 때 모든 데이터가 존재하여 로딩중 상태를 보지 않는 상태. getServerSideProps 함수를 이용하며 오직 Backend에서만 해당 코드를 볼 수 있기에 fetch, DB요청,API 불러오기, API KEY 사용이 가능하다. 백엔드에서 API 모두 처리해야 유저가 페이지를 사용할 수 있다.
