@@ -176,6 +176,11 @@ export default function Home({ data }) {
 https://nomadcoders.co/nextjs-fundamentals/lectures/3449
 
 - 클라이언드 사이드 렌더링 |
-  데이터 패치 전에 미리 html 페이지를 export 하여 생성한다. 고로 reactJs를 통해 차후에 들어오는 데이터가 소스에 포함되지 않는다. 누구가 홈페이지에 접속했을 때 reactJs가 처리를 마치기 전까지는 initialPage를 확인할 수 있다. 즉) ReactJs의 처리가 완료될 때까지 기다려야하며 유저는 API에서 데이터를 받아올 때까지 "로딩중" 상태를 봐야한다.
+  데이터 패치 전에 미리 html 페이지를 export 하여 생성한다. (Static Generation) 고로 reactJs를 통해 차후에 들어오는 데이터가 자바스크립트에 의해 반영될지라도 html 소스에는 포함되지 않는다. 누구가 홈페이지에 접속했을 때 reactJs가 처리를 마치기 전까지는 initialPage를 확인할 수 있다. 즉) ReactJs의 처리가 완료될 때까지 기다려야하며 유저는 API에서 데이터를 받아올 때까지 "로딩중" 상태를 봐야한다.
 - 서버 사이드 렌더링 |
   항상 html이 완전한 상태로 존재. 유저가 접속했을 때 모든 데이터가 존재하여 로딩중 상태를 보지 않는 상태. getServerSideProps 함수를 이용하며 오직 Backend에서만 해당 코드를 볼 수 있기에 fetch, DB요청,API 불러오기, API KEY 사용이 가능하다. 백엔드에서 API 모두 처리해야 유저가 페이지를 사용할 수 있다.
+
+즉,
+request time에 반드시 데이터를 fetch해와야 하는 페이지를 pre-render해야 하는 경우에는 getServerSideProps를 사용하고
+데이터를 pre-render할 필요가 없다면 client side에서 데이터를 가져오는 것을 고려해야한다.
+서버 사이드 렌더링은 사용자 대시보드 페이지에 적합하다 => 왜냐하면 대시보드는 사용자별 비공개 페이지이기 때문에 SEO와는 관련이 없으며 페이지를 미리 렌더링할 필요가 없다. 또한 데이터는 자주 업데이트되므로 요청 시 데이터를 가져와야 하기 때문이다.
