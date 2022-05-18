@@ -1,4 +1,4 @@
-# 1.NextJS 특징
+# All about NEXTJS FRAMEWORK with React
 
 # 1.0. Framework & library
 
@@ -26,8 +26,8 @@ pages 폴더 안에 있는 파일명에 따라 route가 결정된다.
 
 # 1.2. Static Pre Rendering
 
-- (ReactJS) Client Side Rendering - Browser(유저)가 자바스크립트를 실행시켜 UI를 빌딩한다. 그래서 비어있는 div 호출한 후에 자바스크립트/리액트를 호출 하는 것을 확인할 수 있다. (실제로 개발자도구를 열어 요소를 확인해보면 html내에 아무것도 없는것 확인 가능). 브라우저가 모두 다 loading & fetch 한다. 그리하여 단점은 자바스크립트를 비활성화 한 유저는 해당 앱을 사용할 수 없으며, 네트워크 속도가 느릴 시 화면 렌더링이 매우 느리게 되는 것을 확인 할 수 있다.
-- (NextJS) Server Side Rendering - Real Html 가져옵니다. (pre-rendering, reactJS가 백엔드에서 먼저 실행하여 컴포넌트들을 렌더링 시킨다.). 컴포넌트들이 미리 렌더링 된 후, 브라우저의 API 호출에 대한 응답값을 받아 컴포넌트를 패치한다. (reactJS 및 스크립트를 프론트에서 실행 -> hydration 방식이라고 일컫는다)
+- Client Side Rendering | Browser(유저)가 자바스크립트를 실행시켜 UI를 빌딩한다. 그래서 비어있는 div 호출한 후에 자바스크립트/리액트를 호출 하는 것을 확인할 수 있다. (실제로 개발자도구를 열어 요소를 확인해보면 html내에 아무것도 없는것 확인 가능). 브라우저가 모두 다 loading & fetch 한다. 그리하여 단점은 자바스크립트를 비활성화 한 유저는 해당 앱을 사용할 수 없으며, 네트워크 속도가 느릴 시 화면 렌더링이 매우 느리게 되는 것을 확인 할 수 있다.
+- Server Side Rendering | Real Html 가져옵니다. (pre-rendering, reactJS가 백엔드에서 먼저 실행하여 컴포넌트들을 렌더링 시킨다.). 컴포넌트들이 미리 렌더링 된 후, 브라우저의 API 호출에 대한 응답값을 받아 컴포넌트를 패치한다. (reactJS 및 스크립트를 프론트에서 실행 -> hydration 방식이라고 일컫는다)
 
 # 1.3. Routing
 
@@ -128,14 +128,14 @@ async <-> await 익명함수, API fetch, setState, javascript map 등을 이용�
 Next.js에서 커스텀 설정을 하기 위해서는 프로젝트 디렉터리의 루트에 next.config.js 파일을 만들 수 있습니다. next.config.js는 JSON 파일이 아닌 일반 Node.js 커스텀 모듈입니다. Njext.js 서버 및 빌드 단계에서 사용되며 브라우저 빌드에는 포함되지 않습니다. 그러므로 설정 후에 항시 서버를 재기동 해야합니다.
 https://nexts.org/docs/api-reference/next.config.js/introduction
 
-- Redirects | URL변경됨
+- Redirects() URL변경됨 |
   Redirect을 사용하면 들어오는 request 경로를 다른 destination 경로로 Redirect할 수 있습니다. Redirect을 사용하려면 next.config.js에서 redirects 키를 사용할 수 있습니다. redirects은 source, destination 및 permanent 속성이 있는 객체를 포함하는 배열을 반환하는 비동기 함수입니다.
   source: 들어오는 request 경로 패턴 (request 경로)
   destination: 라우팅하려는 경로 (redirect할 경로)
   permanent: true인 경우 클라이언트와 search 엔진에 redirect를 영구적으로 cache하도록 지시하는 308 status code를 사용하고, false인 경우 일시적이고 cache되지 않은 307 status code를 사용합니다.
   https://nextjs.org/docs/api-reference/next.config.js/redirects
 
-- Rewrites | URL변경되지 않음
+- Rewrites() URL변경되지 않음 |
   Rewrites를 사용하면 들어오는 request 경로를 다른 destination 경로에 매핑할 수 있습니다.
   Rewrites은 URL 프록시 역할을 하고 destination 경로를 mask하여 사용자가 사이트에서 위치를 변경하지 않은 것처럼 보이게 합니다. 반대로 redirects은 새 페이지로 reroute되고 URL 변경 사항을 표시합니다.
   https://nextjs.org/docs/api-reference/next.config.js/rewrites
@@ -147,12 +147,10 @@ https://nexts.org/docs/api-reference/next.config.js/introduction
   https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props
 - 특징
 
-```
-- export 필수, 함수명 getServerSideProps 이름 필수, return Object & props key 필수
-- 서버, 즉 백엔드에서만 해당 코드를 pre-runninng 하기에 프론트에서 해당 내용을 확인할 수 없다.
-- props 데이터를 page로 전송하여 parameter로 사용이 가능하다.
-- 데이터가 유효할 때 전체적으로 화면이 보이는 방식이기 때문에 Loading Component를 사용 할 필요가 없다.
-```
+1. export 필수, 함수명 getServerSideProps 이름 필수, return Object & props key 필수
+2. 서버, 즉 백엔드에서만 해당 코드를 pre-runninng 하기에 프론트에서 해당 내용을 확인할 수 없다.
+3. props 데이터를 page로 전송하여 parameter로 사용이 가능하다.
+4. 데이터가 유효할 때 전체적으로 화면이 보이는 방식이기 때문에 Loading Component를 사용 할 필요가 없다.
 
 - getServerSideProps를 사용하여 request시 데이터 fetch하고 결과를 pre-rendering하기
 
@@ -174,6 +172,8 @@ export default function Home({ data }) {
 ```
 
 # CHAPTER 2 RECAP 클라이언드 사이드 렌더링 vs 서버 사이드 렌더링
+
+https://nomadcoders.co/nextjs-fundamentals/lectures/3449
 
 - 클라이언드 사이드 렌더링 |
   데이터 패치 전에 미리 html 페이지를 export 하여 생성한다. 고로 reactJs를 통해 차후에 들어오는 데이터가 소스에 포함되지 않는다. 누구가 홈페이지에 접속했을 때 reactJs가 처리를 마치기 전까지는 initialPage를 확인할 수 있다. 즉) ReactJs의 처리가 완료될 때까지 기다려야하며 유저는 API에서 데이터를 받아올 때까지 "로딩중" 상태를 봐야한다.
