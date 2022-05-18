@@ -133,3 +133,28 @@ https://nexts.org/docs/api-reference/next.config.js/introduction
   Rewrites를 사용하면 들어오는 request 경로를 다른 destination 경로에 매핑할 수 있습니다.
   Rewrites은 URL 프록시 역할을 하고 destination 경로를 mask하여 사용자가 사이트에서 위치를 변경하지 않은 것처럼 보이게 합니다. 반대로 redirects은 새 페이지로 reroute되고 URL 변경 사항을 표시합니다.
   https://nextjs.org/docs/api-reference/next.config.js/rewrites
+
+# 2.3 Server Side Rendering
+
+- getServerSideProps
+  page에서 서버 측 랜더링 함수인 getServerSideProps함수를 export하는 경우 Next.js는 getServerSideProps에서 반환된 데이터를 사용하여 각 request에서 이 페이지를 pre-render합니다. getServerSideProps는 서버 측에서만 실행되며 브라우저에서는 실행되지 않습니다. 서버 사이드 렌더링을 사용하면 redirect 및 rewrite 프론트 기능을 사용할 수 없게됩니다. 이에 데이터를 다 가져와서 rendering 하는 방식 (서버 사이드 렌더링) vs 미리 정적 html을 불러온 후 데이터를 입힐지 (클라이언트 사이드 렌더링) 선택하여 구현하는것이 중요합니다.
+  https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props
+
+- getServerSideProps를 사용하여 request시 데이터 fetch하고 결과를 pre-rendering하기
+
+```
+// 매 request마다 실행됩니다.
+export async function getServerSideProps() {
+const res = await fetch(`https://.../data`); // origin URL
+const data = await res.json();
+
+// props를 통해 page에 data 전달
+return { props: { data } }
+}
+
+// 전달받은 data로 랜더링
+export default function Home({ data }) {
+  data.map((var)=><div key={var.index}> {var.name} </div>))
+}
+
+```

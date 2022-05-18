@@ -1,25 +1,29 @@
 import Seo from "../components/Seo";
 import { useState, useEffect } from "react";
 
-export default function Home() {
-    const [movies, setMovies] = useState();
+// export 필수, 함수명 getServerSideProps 이름 필수, return Object & props key 필수
+// 서버, 즉 백엔드에서만 해당 코드를 pre-runninng 하며 접근가능하며 시인가능하다.
+// server-side를 통해 props를 page로 전송 가능!
+export async function getServerSideProps() {
+  const {results} = await (
+    await fetch(
+      `http://localhost:3000/api/movies`
+    )
+  ).json();
 
-    useEffect(() => {
-      (async () => {
-        const {results} = await (
-          await fetch(
-            `/api/movies`
-          )
-        ).json();
-        setMovies(results);
-      })();
-    }, []);
+  return {
+    props: {
+      results,
+    }
+  }
+} 
 
+export default function Home({results}) {
     return (
         <div className="container"> 
             <Seo title="Home" />
-            {!movies && <h4> loading.. </h4>}
-            {movies?.map((movie) => 
+            {!results && <h4> loading.. </h4>}
+            {results?.map((movie) => 
             <div key={movie.id} className="movie">
                 <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
                 <h4>{movie.title}</h4>
