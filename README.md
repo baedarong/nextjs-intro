@@ -7,10 +7,10 @@
 라이브러리에서 메서드를 호출하면 사용자가 제어할 수 있습니다.
 그러나 프레임워크에서는 제어가 역전되어 프레임워크가 사용자를 호출합니다.
 
-- 라이브러리
+- 라이브러리 |
   사용자가 파일 이름이나 구조 등을 정하고, 모든 결정을 내림
   개발자가 어떤 프로그램을 가져다 쓰는것 (Ex React.js: 렌더링할때 ReactDOM.render()를 불러와서 사용하며 유저가 변경할 수 있다.)
-- 프레임워크
+- 프레임워크 |
   파일 이름이나 구조 등을 정해진 규칙에 따라 만들고 따름
   개발자의 코드를 프로그램이 불러오는 것 (Ex Next.js: 정해진 규칙에 따라 코드를 작성해야만 렌더링이 올바르게 된다.)
 
@@ -18,11 +18,11 @@
 
 pages 폴더 안에 있는 파일명에 따라 route가 결정된다.
 
-pages/about.js 생성 -> localhost:3000/about (사용가능)
-다만 예외사항으로, index.js의 경우에는 앱이 시작하는 파일이라고 보면 된다. 즉 localhost:3000 그 자체다 뒤에 /index 로 붙이면 안된다.
+- pages/about.js 생성 -> localhost:3000/about (사용가능)
+  다만 예외사항으로, index.js의 경우에는 앱이 시작하는 파일이라고 보면 된다. 즉 localhost:3000 그 자체다 뒤에 /index 로 붙이면 안된다.
 
-또한, nextJS 프레임워크 사용 시
-import react from "react"를 쓸 필요가 없다. 다만 useState,useEffect, lifecycle method 같은 애들을 써야 할 경우에는 꼭 import를 해줘야 한다.
+- 또한, nextJS 프레임워크 사용 시
+  import react from "react"를 쓸 필요가 없다. 다만 useState,useEffect, lifecycle method 같은 애들을 써야 할 경우에는 꼭 import를 해줘야 한다.
 
 # 1.2. Static Pre Rendering
 
@@ -58,14 +58,17 @@ https://nextjs.org/docs/api-reference/next/router#userouter
 
 anything.module.css 형식의 모듈 파일을 생성한 후 import 해서 사용한다. 모듈방식을 사용하면 클래스 네임의 충돌을 걱정할 필요가 사라지지만, 해당 방식처럼 사용한다면 css 파일이 엄청 늘어날 수 있다.
 `import styles from './NavBar.module.css`
-해당 모듈(스타일시트)를 사용하는 방법
 
+- 해당 모듈(스타일시트)를 사용하는 방법
+
+```
 1. 백탭: className={`${styles.link} ${router.pathname === "/" ? styles.active : ""}`}
 2. 배열형식: [styles.link, router.pathname === "/" ? styles.active : ""].join(" ")
+```
 
 # 1.5. styled CSS // NextJS 고유의 방식(?)
 
-styled-jsx를 사용하는 컴포넌트 다음과 같이 정의합니다
+styled-jsx를 사용하는 컴포넌트 다음과 같이 정의한다. 해당 방식이 가장 간단하지만 큰 프로젝트의 경우 공통모듈로 빼는 것을 추천한다.
 
 ```
 < style jsx>{`
@@ -97,9 +100,10 @@ https://nextjs.org/docs/advanced-features/custom-app
 
 또한 .css 파일은 App 이외 다른 컴포넌트에서 사용할 수 없으며,
 다른 컴포넌트에서 스타일시트를 적용하고 싶다면 무조건 module.css 형식으로 변경한 후 임포트하여 사용해야한다.
+
 https://nextjs.org/docs/messages/css-global
 
-# 1.RECAP
+# CHAPTER 1 RECAP
 
 https://nomadcoders.co/nextjs-fundamentals/lectures/3444
 
@@ -115,7 +119,9 @@ https://nomadcoders.co/nextjs-fundamentals/lectures/3444
 
 # 2.1 Fetching Data
 
-async <-> await 익명함수, API fetch, setState, javascript map
+```
+async <-> await 익명함수, API fetch, setState, javascript map 등을 이용하여 데이터를 패치해오기
+```
 
 # 2.2 Redirect and Rewrite
 
@@ -142,11 +148,10 @@ https://nexts.org/docs/api-reference/next.config.js/introduction
 - 특징
 
 ```
-export 필수, 함수명 getServerSideProps 이름 필수, return Object & props key 필수
-서버, 즉 백엔드에서만 해당 코드를 pre-runninng 하기에 프론트에서 해당 내용을 확인할 수 없다.
-props 데이터를 page로 전송하여 parameter로 사용이 가능하다.
-데이터가 유효할 때 전체적으로 화면이 보이는 방식이기 때문에 Loading Component를 사용 할 필요가 없다.
-
+- export 필수, 함수명 getServerSideProps 이름 필수, return Object & props key 필수
+- 서버, 즉 백엔드에서만 해당 코드를 pre-runninng 하기에 프론트에서 해당 내용을 확인할 수 없다.
+- props 데이터를 page로 전송하여 parameter로 사용이 가능하다.
+- 데이터가 유효할 때 전체적으로 화면이 보이는 방식이기 때문에 Loading Component를 사용 할 필요가 없다.
 ```
 
 - getServerSideProps를 사용하여 request시 데이터 fetch하고 결과를 pre-rendering하기
@@ -168,9 +173,9 @@ export default function Home({ data }) {
 
 ```
 
-# 2. RECAP 클라이언드 사이드 렌더링 vs 서버 사이드 렌더링
+# CHAPTER 2 RECAP 클라이언드 사이드 렌더링 vs 서버 사이드 렌더링
 
-- 클라이언드 사이드 렌더링
+- 클라이언드 사이드 렌더링 |
   데이터 패치 전에 미리 html 페이지를 export 하여 생성한다. 고로 reactJs를 통해 차후에 들어오는 데이터가 소스에 포함되지 않는다. 누구가 홈페이지에 접속했을 때 reactJs가 처리를 마치기 전까지는 initialPage를 확인할 수 있다. 즉) ReactJs의 처리가 완료될 때까지 기다려야하며 유저는 API에서 데이터를 받아올 때까지 "로딩중" 상태를 봐야한다.
-- 서버 사이드 렌더링
+- 서버 사이드 렌더링 |
   항상 html이 완전한 상태로 존재. 유저가 접속했을 때 모든 데이터가 존재하여 로딩중 상태를 보지 않는 상태. getServerSideProps 함수를 이용하며 오직 Backend에서만 해당 코드를 볼 수 있기에 fetch, DB요청,API 불러오기, API KEY 사용이 가능하다. 백엔드에서 API 모두 처리해야 유저가 페이지를 사용할 수 있다.
