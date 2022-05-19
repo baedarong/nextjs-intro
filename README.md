@@ -199,14 +199,14 @@ request time에 반드시 데이터를 fetch해와야 하는 페이지를 pre-re
   ex) query: { "id": ["a"] }
   https://nextjs.org/docs/routing/dynamic-routes#catch-all-routes
 
-  # 2.6 routing to Detail Page with Id & Title
+# 2.6 routing to Detail Page with Id & Title
 
-  한 컴포넌트에서 객체를 클릭하여 다른 컴포넌트로 라우팅 시키는 방식에는 두 가지 방식이 존재합니다.
+한 컴포넌트에서 객체를 클릭하여 다른 컴포넌트로 라우팅 시키는 방식에는 두 가지 방식이 존재합니다.
 
-  1. Link를 사용해서 href={링크}를 사용하는 방식
-  2. 또는 div에 onclick 메소드를 걸어 함수 발생 시 router.push 하는 방식입니다.
+1. Link를 사용해서 href={링크}를 사용하는 방식
+2. 또는 div에 onclick 메소드를 걸어 함수 발생 시 router.push 하는 방식입니다.
 
-  - router.push(url, as, options)
+- router.push(url, as, options)
 
 클라이언트 측 전환을 처리합니다. 이 방법은 next/link가 충분하지 않은 경우에 유용합니다.
 url: UrlObject | pathName:string, query:object
