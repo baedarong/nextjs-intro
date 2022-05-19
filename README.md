@@ -198,3 +198,27 @@ request time에 반드시 데이터를 fetch해와야 하는 페이지를 pre-re
   대괄호 안에 세 개의 점(...)을 추가하여 모든 경로를 포착하도록 Dynamic Routes를 확장할 수 있습니다. pages/movies/[...id].js는 /movies/1와 일치하지만 /movies/1/2, /movies/1/ab/cd 등과도 일치합니다. 일치하는 매개변수는 페이지에 쿼리 매개변수로 전송되며 항상 배열이므로 /movies/a 경로에는 다음 쿼리 개체가 있습니다.
   ex) query: { "id": ["a"] }
   https://nextjs.org/docs/routing/dynamic-routes#catch-all-routes
+
+  # 2.6 routing to Detail Page with Id & Title
+
+  한 컴포넌트에서 객체를 클릭하여 다른 컴포넌트로 라우팅 시키는 방식에는 두 가지 방식이 존재합니다.
+
+  1. Link를 사용해서 href={링크}를 사용하는 방식
+  2. 또는 div에 onclick 메소드를 걸어 함수 발생 시 router.push 하는 방식입니다.
+
+  - router.push(url, as, options)
+
+클라이언트 측 전환을 처리합니다. 이 방법은 next/link가 충분하지 않은 경우에 유용합니다.
+url: UrlObject | pathName:string, query:object
+as: UrlObject | String: 브라우저 URL 표시줄에 표시될 경로. URL 마스킹할 때 사용합니다.
+
+```
+router.push({
+pathname: '/post/[pid]',
+query: { postname: post.name },
+})
+```
+
+[참고] 외부 URL에 대해서는 router.push()를 사용할 필요가 없습니다.
+window.location을 사용하는 것이 더 적합합니다.
+https://nextjs.org/docs/api-reference/next/router#routerpush
