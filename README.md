@@ -225,25 +225,27 @@ https://nextjs.org/docs/api-reference/next/router#routerpush
 
 # 2.7 Catch ALL URL
 
-- getServerSideProps |
+- SSR getServerSideProps |
   페이지에서 getServerSideProps(서버 측 렌더링)라는 함수를 export하는 경우 Next.js는 서버에서 getServerSideProps에서 반환된 데이터를 사용하여 각 request에서 이 페이지를 pre-render한 후, 클라이언트단에서 나머지 js를 처리합니다. >> 2.3 참고
   https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props
 
-- getServerSideProps (Context parameter) |
+- SSR getServerSideProps (Context parameter) |
   params: 부모 컴포넌트가 dynamic route(동적 경로)를 사용하는 경우 (ex. Link, router.push... ) 자식 컴포넌트의 getSerSideProps params에 route parameter가 포함됩니다. 페이지 이름이 [id].js이면 params는 { id: ... }처럼 보일 것입니다.
   query: 쿼리 문자열을 나타내는 객체입니다. 파일설정을 [...id].js 식으로 지정했다면 모든 URL 요소에 대해 배열 형태로 catch할 수 있습니다.
   https://nextjs.org/docs/api-reference/data-fetching/get-server-side-props#context-parameter
 
-- getServerSideProps (TypeScript Ver.)
+[사용자의 방식에 따라 구분]
+
+1.  getServerSideProps를 사용해서 dynamic route parameter 접근하기 (TypeScript Ver.) |
 
 ```
 import { GetServerSideProps } from 'next'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(context);
+  console.log(context.params);
   return {
     props: {
-      context.params.params;
+      context.params;
       //... and so on
     }
   }
@@ -254,9 +256,31 @@ export default function Page({ data }: InferGetServerSidePropsType<typeof getSer
 }
 ```
 
+2. getServerSideProps를 사용해서 URL 값에 접근하기 (TypeScript Ver.) |
+
+```
+import { GetServerSideProps } from 'next'
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log(context.query);
+  return {
+    props: {
+      context.query;
+      //... and so on
+    }
+  }
+}
+
+export default function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  return "something"
+}
+```
+
+https://stackoverflow.com/questions/69058259/how-to-access-route-parameter-inside-getserversideprops-in-next-js
+https://nextjs.org/docs/api-reference/data-fetching/get-server-side-props#context-parameter
 https://nextjs.org/docs/api-reference/data-fetching/get-server-side-props#getserversideprops-with-typescript
 
-- 클라이언트 사이드 렌더링 시 router.query.params 타입 지정 (Typescript Ver)
+- 클라이언트 사이드 렌더링 시 router.query.params 타입 지정 (Typescript Ver.)
 
 ```
 type MovieDetailParams = [string, string] | [];
