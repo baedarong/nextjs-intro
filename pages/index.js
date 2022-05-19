@@ -1,10 +1,5 @@
 import Seo from "../components/Seo";
-import { useState, useEffect } from "react";
 
-// export 필수, 함수명 getServerSideProps 이름 필수, return Object & props key 필수
-// 서버, 즉 백엔드에서만 해당 코드를 pre-runninng 하며 접근가능하며 시인가능하다.
-// server-side를 통해 props를 page로 전송 가능!
-// 데이터가 유효할 때 화면이 보이지게 된다. --> loading 같은거 이제 사용 안함
 export async function getServerSideProps() {
   const {results} = await (
     await fetch(
